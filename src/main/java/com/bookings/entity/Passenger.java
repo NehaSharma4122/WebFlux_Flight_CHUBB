@@ -5,7 +5,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "passenger")
 public class Passenger {
 	@Id
@@ -18,37 +24,5 @@ public class Passenger {
 
     @Min(1)
     private int age;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
     
 }

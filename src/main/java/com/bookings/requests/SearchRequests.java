@@ -7,7 +7,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SearchRequests {
 	@NotBlank(message = "From place is required")
     private String fromPlace;
@@ -26,45 +32,5 @@ public class SearchRequests {
     @NotNull(message = "Trip type is required")
     private Trip tripType;
 
-	public String getFromPlace() {
-		return fromPlace;
-	}
-
-	public void setFromPlace(String fromPlace) {
-		this.fromPlace = fromPlace;
-	}
-
-	public String getToPlace() {
-		return toPlace;
-	}
-
-	public void setToPlace(String toPlace) {
-		this.toPlace = toPlace;
-	}
-
-	public LocalDate getTravelDate() {
-		return travelDate;
-	}
-
-	public void setTravelDate(LocalDate travelDate) {
-		this.travelDate = travelDate;
-	}
-
-	public LocalDate getReturnDate() {
-		return returnDate;
-	}
-
-	public void setReturnDate(LocalDate returnDate) {
-		this.returnDate = returnDate;
-	}
-
-	public Trip getTripType() {
-		return tripType;
-	}
-
-	public void setTripType(Trip tripType) {
-		this.tripType = tripType;
-	}
-    
     
 }

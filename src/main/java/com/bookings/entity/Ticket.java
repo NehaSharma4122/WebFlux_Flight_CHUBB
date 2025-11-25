@@ -7,8 +7,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import org.springframework.data.annotation.Id;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "ticket")
 public class Ticket {
 	@Id
@@ -30,77 +37,4 @@ public class Ticket {
 
     private String status;
 
-	public String getPnr() {
-		return pnr;
-	}
-
-	public void setPnr(String pnr) {
-		this.pnr = pnr;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getFlightId() {
-		return flightId;
-	}
-
-	public void setFlightId(String flightId) {
-		this.flightId = flightId;
-	}
-
-	public Integer getNumSeats() {
-		return numSeats;
-	}
-
-	public void setNumSeats(Integer numSeats) {
-		this.numSeats = numSeats;
-	}
-
-	public List<Passenger> getPassenger() {
-		return passenger;
-	}
-
-	public void setPassenger(List<Passenger> passenger) {
-		this.passenger = passenger;
-	}
-
-	public MealType getMealpref() {
-		return mealpref;
-	}
-
-	public void setMealpref(MealType mealpref) {
-		this.mealpref = mealpref;
-	}
-
-	public String getSeatNumber() {
-		return seatNumber;
-	}
-
-	public void setSeatNumber(String seatNumber) {
-		this.seatNumber = seatNumber;
-	}
-
-	public LocalDateTime getBookingDate() {
-		return bookingDate;
-	}
-
-	public void setBookingDate(LocalDateTime bookingDate) {
-		this.bookingDate = bookingDate;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-    
-    
 }
