@@ -11,7 +11,7 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface FlightRepository extends ReactiveMongoRepository<Flight, String>{
-	 Flux<Flight> travellingDetails(
+	 Flux<Flight> findByFromPlaceAndToPlaceAndDepartureBetween(
 			 String fromPlace, String toPlace,
 			 LocalDateTime departureStart, LocalDateTime departureEnd);
 }

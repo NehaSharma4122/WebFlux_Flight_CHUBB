@@ -6,7 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
@@ -31,9 +32,11 @@ public class Flight {
     private String toPlace;
 
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @Future(message = "Travel date must be in the future")
     private LocalDateTime departure;
 
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @Future(message = "Travel date must be in the future")
     private LocalDateTime arrival;
 
     @Min(1)

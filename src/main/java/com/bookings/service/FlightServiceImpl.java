@@ -37,7 +37,7 @@ public class FlightServiceImpl implements FlightService {
         LocalDateTime dayEnd = dayStart.plusDays(1);
 
         if (tripType == Trip.ONE_WAY) {
-            return flightRepository.travellingDetails(
+            return flightRepository.findByFromPlaceAndToPlaceAndDepartureBetween(
                     searchRequest.getFromPlace(),
                     searchRequest.getToPlace(),
                     dayStart,
@@ -59,7 +59,7 @@ public class FlightServiceImpl implements FlightService {
             LocalDateTime returnEnd = returnStart.plusDays(1);
 
             Flux<Flight> outbound =
-                    flightRepository.travellingDetails(
+                    flightRepository.findByFromPlaceAndToPlaceAndDepartureBetween(
                             searchRequest.getFromPlace(),
                             searchRequest.getToPlace(),
                             dayStart,
@@ -67,7 +67,7 @@ public class FlightServiceImpl implements FlightService {
                     );
 
             Flux<Flight> inbound =
-                    flightRepository.travellingDetails(
+                    flightRepository.findByFromPlaceAndToPlaceAndDepartureBetween(
                             searchRequest.getToPlace(),
                             searchRequest.getFromPlace(),
                             returnStart,
@@ -77,7 +77,7 @@ public class FlightServiceImpl implements FlightService {
             return Flux.concat(outbound, inbound);
         }
 
-        return flightRepository.travellingDetails(
+        return flightRepository.findByFromPlaceAndToPlaceAndDepartureBetween(
                 searchRequest.getFromPlace(),
                 searchRequest.getToPlace(),
                 dayStart,

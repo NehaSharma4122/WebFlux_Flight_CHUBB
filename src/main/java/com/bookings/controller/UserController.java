@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookings.entity.User;
+import com.bookings.requests.LoginRequest;
 import com.bookings.requests.UserRequest;
 import com.bookings.service.UserService;
 
@@ -31,11 +32,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Mono<ResponseEntity<User>> login(
-            @RequestParam String email,
-            @RequestParam String password) {
-
-        return userService.loginUser(email, password)
+    public Mono<ResponseEntity<User>> login(@RequestBody LoginRequest request) {
+    	return userService.loginUser(request)
                 .map(ResponseEntity::ok);
     }
 

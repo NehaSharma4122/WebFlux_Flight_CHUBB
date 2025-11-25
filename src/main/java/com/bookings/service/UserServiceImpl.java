@@ -9,6 +9,7 @@ import com.bookings.exception.ResourceConflictException;
 import com.bookings.exception.ResourceNotFoundException;
 import com.bookings.exception.UnauthorizedException;
 import com.bookings.repository.UserRepository;
+import com.bookings.requests.LoginRequest;
 import com.bookings.requests.UserRequest;
 
 import reactor.core.publisher.Mono;
@@ -41,12 +42,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Mono<User> loginUser(String email, String password) {
+    public Mono<User> loginUser(LoginRequest loginRequest) {
 
-        return userRepository.findByEmail(email)
+        return userRepository.findByEmail(loginRequest.getEmail())
                 .switchIfEmpty(Mono.error(new ResourceNotFoundException("User not found!")))
                 .flatMap(user -> {
-                    if (!user.getPassword().equals(password)) {
+                    if (!user.getPassword().equals(loginRequest.getPassword())) {
                         return Mono.error(new UnauthorizedException("Invalid Password"));
                     }
                     return Mono.just(user);

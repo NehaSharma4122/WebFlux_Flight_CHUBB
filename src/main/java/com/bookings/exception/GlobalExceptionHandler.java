@@ -15,9 +15,6 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // -----------------------------
-    // Helper: Build Response
-    // -----------------------------
     private Mono<ResponseEntity<Map<String, Object>>> buildResponse(
             HttpStatus status, String message, String exceptionType) {
 
@@ -32,47 +29,31 @@ public class GlobalExceptionHandler {
     }
 
 
-    // -----------------------------
-    // 404 NOT FOUND
-    // -----------------------------
     @ExceptionHandler(ResourceNotFoundException.class)
     public Mono<ResponseEntity<Map<String, Object>>> handleNotFound(ResourceNotFoundException ex) {
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), ex.getClass().getSimpleName());
     }
 
 
-    // -----------------------------
-    // 409 CONFLICT
-    // (e.g. "User already exists")
-    // -----------------------------
     @ExceptionHandler(ResourceConflictException.class)
     public Mono<ResponseEntity<Map<String, Object>>> handleConflict(ResourceConflictException ex) {
         return buildResponse(HttpStatus.CONFLICT, ex.getMessage(), ex.getClass().getSimpleName());
     }
 
 
-    // -----------------------------
-    // 422 UNPROCESSABLE ENTITY
-    // (Invalid state, semantic errors)
-    // -----------------------------
+
     @ExceptionHandler(UnprocessableException.class)
     public Mono<ResponseEntity<Map<String, Object>>> handleUnprocessable(UnprocessableException ex) {
         return buildResponse(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage(), ex.getClass().getSimpleName());
     }
 
 
-    // -----------------------------
-    // 400 BAD REQUEST / RUNTIME EXCEPTIONS
-    // -----------------------------
     @ExceptionHandler(RuntimeException.class)
     public Mono<ResponseEntity<Map<String, Object>>> handleRuntime(RuntimeException ex) {
         return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), ex.getClass().getSimpleName());
     }
 
 
-    // -----------------------------
-    // 401 UNAUTHORIZED
-    // -----------------------------
     @ExceptionHandler(UnauthorizedException.class)
     public Mono<ResponseEntity<Map<String, Object>>> handleUnauthorized(UnauthorizedException ex) {
         return buildResponse(HttpStatus.UNAUTHORIZED, ex.getMessage(), ex.getClass().getSimpleName());
@@ -87,9 +68,6 @@ public class GlobalExceptionHandler {
     }
 
 
-    // -----------------------------
-    // 400 – VALIDATION FAILURE
-    // -----------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Mono<ResponseEntity<Map<String, Object>>> handleValidation(MethodArgumentNotValidException ex) {
 
@@ -110,9 +88,6 @@ public class GlobalExceptionHandler {
     }
 
 
-    // -----------------------------
-    // 500 INTERNAL SERVER ERROR
-    // -----------------------------
     @ExceptionHandler(Exception.class)
     public Mono<ResponseEntity<Map<String, Object>>> handleGeneric(Exception ex) {
         ex.printStackTrace(); // optional logging
